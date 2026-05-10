@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Style Profile — Personal Styling Intake</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f7f3ee;
+    --warm-white: #faf8f5;
+    --charcoal: #1e1c1a;
+    --ink: #2e2b28;
+    --taupe: #9c8f83;
+    --dusty-rose: #c4a89a;
+    --gold: #b8975a;
+    --sage: #8a9987;
+    --border: #e0d8d0;
+    --section-bg: #f0ebe4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    padding: 0 0 80px;
+  }
+
+  header {
+    background: var(--charcoal);
+    color: var(--cream);
+    text-align: center;
+    padding: 56px 24px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.015) 40px,
+      rgba(255,255,255,0.015) 80px
+    );
+  }
+
+  .header-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 7vw, 62px);
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    margin-bottom: 16px;
+  }
+
+  header h1 em { font-style: italic; color: var(--dusty-rose); }
+
+  header p {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(247,243,238,0.65);
+    letter-spacing: 0.5px;
+    max-width: 420px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .progress-bar {
+    height: 2px;
+    background: var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--dusty-rose));
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .survey-container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .section {
+    margin-top: 56px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--gold);
+    min-width: 24px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  .section-title span { color: var(--taupe); font-style: italic; font-weight: 300; }
+
+  .question { margin-bottom: 32px; }
+
+  label.q-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.4px;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+
+  label.q-label .required { color: var(--dusty-rose); margin-left: 3px; }
+
+  .q-hint {
+    font-size: 11.5px;
+    color: var(--taupe);
+    margin-bottom: 12px;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  textarea,
+  select {
+    width: 100%;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 14px 16px;
+    font-family: 'Jost', sans-serif;
+    font-size: 13.5px;
+    font-weight: 300;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  textarea:focus,
+  select:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(184,151,90,0.1);
+  }
+
+  input.error { border-color: var(--dusty-rose) !important; }
+
+  textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
+
+  .range-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 4px;
+  }
+
+  input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 2px;
+    background: var(--border);
+    border-radius: 1px;
+    outline: none;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--gold);
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+
+  .range-val {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--gold);
+    min-width: 64px;
+    text-align: right;
+  }
+
+  .range-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10.5px;
+    color: var(--taupe);
+    letter-spacing: 0.3px;
+    margin-top: 6px;
+  }
+
+  .chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .chip {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    background: var(--warm-white);
+    color: var(--ink);
+    transition: all 0.15s ease;
+    user-select: none;
+  }
+
+  .chip:hover { border-color: var(--taupe); }
+  .chip.selected { background: var(--charcoal); border-color: var(--charcoal); color: var(--cream); }
+
+  .toggle-group {
+    display: flex;
+    gap: 0;
+    margin-top: 4px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    width: fit-content;
+  }
+
+  .toggle-option {
+    padding: 10px 22px;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.6px;
+    cursor: pointer;
+    background: var(--warm-white);
+    color: var(--taupe);
+    border-right: 1px solid var(--border);
+    transition: all 0.15s;
+    user-select: none;
+  }
+
+  .toggle-option:last-child { border-right: none; }
+  .toggle-option:hover { color: var(--ink); }
+  .toggle-option.selected { background: var(--charcoal); color: var(--cream); }
+
+  .scale-group {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+
+  .scale-dot {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--warm-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--taupe);
+  }
+
+  .scale-dot:hover { border-color: var(--gold); color: var(--gold); }
+  .scale-dot.selected { background: var(--gold); border-color: var(--gold); color: white; font-weight: 500; }
+
+  .scale-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 296px;
+    font-size: 10.5px;
+    color: var(--taupe);
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 560px) { .two-col { grid-template-columns: 1fr; } }
+
+  .conditional {
+    display: none;
+    margin-top: 16px;
+    padding: 20px;
+    background: var(--section-bg);
+    border-left: 2px solid var(--gold);
+    border-radius: 0 2px 2px 0;
+    animation: fadeUp 0.3s ease;
+  }
+
+  .conditional.visible { display: block; }
+
+  .submit-area {
+    margin-top: 64px;
+    text-align: center;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+  }
+
+  .submit-area p {
+    font-size: 12px;
+    color: var(--taupe);
+    margin-bottom: 28px;
+    font-style: italic;
+    line-height: 1.7;
+  }
+
+  button.submit-btn {
+    background: var(--charcoal);
+    color: var(--cream);
+    border: none;
+    padding: 18px 56px;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.1s, opacity 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  button.submit-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(184,151,90,0.2), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  button.submit-btn:hover { background: #2e2b28; }
+  button.submit-btn:hover::after { opacity: 1; }
+  button.submit-btn:active { transform: scale(0.98); }
+  button.submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .error-msg {
+    display: none;
+    background: rgba(196,168,154,0.15);
+    border: 1px solid var(--dusty-rose);
+    border-radius: 2px;
+    padding: 14px 18px;
+    font-size: 12.5px;
+    color: #8a5a4a;
+    margin-top: 20px;
+    text-align: left;
+    line-height: 1.6;
+  }
+
+  .error-msg.visible { display: block; }
+
+  .success-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--charcoal);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 40px;
+  }
+
+  .success-overlay.show { display: flex; animation: fadeUp 0.5s ease; }
+
+  .success-overlay .mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px;
+    color: var(--gold);
+    margin-bottom: 24px;
+    font-style: italic;
+    line-height: 1;
+  }
+
+  .success-overlay h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 16px;
+  }
+
+  .success-overlay p {
+    font-size: 13px;
+    color: rgba(247,243,238,0.6);
+    max-width: 340px;
+    line-height: 1.8;
+  }
+
+  .ornament {
+    text-align: center;
+    color: var(--border);
+    font-size: 18px;
+    letter-spacing: 8px;
+    margin: 12px 0 0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div style="font-family:'Cormorant Garamond',serif; font-size: clamp(28px,5vw,44px); font-weight:300; letter-spacing:0.12em; color:var(--cream); margin-bottom:10px; text-transform:uppercase; position:relative;">Style <em style="font-style:italic; color:var(--gold);">&</em> Stiletto</div>
+  <div class="header-eyebrow">Personal Styling — Client Intake</div>
+  <h1>Your <em>Style</em> Profile</h1>
+  <p>Take a few minutes to share your aesthetic, lifestyle, and goals. Your answers shape every piece I curate for you.</p>
+</header>
+
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<div class="survey-container">
+
+  <!-- SECTION 1: About You -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">About <span>You</span></h2>
+    </div>
+
+    <div class="two-col">
+      <div class="question">
+        <label class="q-label">First Name <span class="required">*</span></label>
+        <input type="text" id="first_name" placeholder="Your first name">
+      </div>
+      <div class="question">
+        <label class="q-label">Last Name</label>
+        <input type="text" id="last_name" placeholder="Your last name">
+      </div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">Email Address <span class="required">*</span></label>
+      <input type="email" id="email" placeholder="where I'll send your style notes">
+    </div>
+
+    <div class="question">
+      <label class="q-label">Age Range</label>
+      <div class="chip-group" data-field="age_range">
+        <div class="chip" onclick="toggleChip(this, true)">18–24</div>
+        <div class="chip" onclick="toggleChip(this, true)">25–34</div>
+        <div class="chip" onclick="toggleChip(this, true)">35–44</div>
+        <div class="chip" onclick="toggleChip(this, true)">45–54</div>
+        <div class="chip" onclick="toggleChip(this, true)">55–64</div>
+        <div class="chip" onclick="toggleChip(this, true)">65+</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">Location <span class="required">*</span></label>
+      <div class="q-hint">City & state helps me recommend locally available shops and climate-appropriate pieces.</div>
+      <input type="text" id="location" placeholder="e.g. Houston, TX">
+    </div>
+  </div>
+
+  <!-- SECTION 2: Budget -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Budget & <span>Investment</span></h2>
+    </div>
+
+    <div class="question">
+      <label class="q-label">Typical budget per piece — everyday items <span class="required">*</span></label>
+      <div class="range-row">
+        <input type="range" min="0" max="1000" step="25" value="150" oninput="updateRange(this,'rangeA')" id="rangeInputA">
+        <span class="range-val" id="rangeA">$150</span>
+      </div>
+      <div class="range-labels"><span>$0</span><span>$250</span><span>$500</span><span>$750</span><span>$1,000+</span></div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">Are you willing to invest more in staple / investment pieces?</label>
+      <div class="q-hint">Staples = quality basics you'll wear for years (a cashmere coat, tailored trousers, a structured bag).</div>
+      <div class="toggle-group" data-field="investment_pieces">
+        <div class="toggle-option" onclick="toggleOption(this)">Yes, absolutely</div>
+        <div class="toggle-option" onclick="toggleOption(this)">Sometimes</div>
+        <div class="toggle-option" onclick="toggleOption(this)">Prefer to keep all prices consistent</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">Maximum you'd consider for a true investment staple (coat, bag, boots, etc.)</label>
+      <div class="range-row">
+        <input type="range" min="0" max="5000" step="100" value="500" oninput="updateRange(this,'rangeB')" id="rangeInputB">
+        <span class="range-val" id="rangeB">$500</span>
+      </div>
+      <div class="range-labels"><span>$0</span><span>$1,000</span><span>$2,000</span><span>$3,500</span><span>$5,000+</span></div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">How do you prefer to shop?</label>
+      <div class="chip-group" data-field="shopping_preference">
+        <div class="chip" onclick="toggleChip(this)">New full-price retail</div>
+        <div class="chip" onclick="toggleChip(this)">Sale / outlet</div>
+        <div class="chip" onclick="toggleChip(this)">Luxury resale (TheRealReal, Vestiaire)</div>
+        <div class="chip" onclick="toggleChip(this)">Vintage / thrift</div>
+        <div class="chip" onclick="toggleChip(this)">A mix of all</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: Wardrobe Needs -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Wardrobe <span>Needs</span></h2>
+    </div>
+
+    <div class="question">
+      <label class="q-label">What are you shopping for? <span class="required">*</span></label>
+      <div class="q-hint">Select all that apply.</div>
+      <div class="chip-group" id="occasionChips" data-field="shopping_for">
+        <div class="chip" onclick="toggleChip(this); checkWork(this)" data-val="work">Work / Office</div>
+        <div class="chip" onclick="toggleChip(this)">Casual / Everyday</div>
+        <div class="chip" onclick="toggleChip(this)">Going Out / Nightlife</div>
+        <div class="chip" onclick="toggleChip(this)">Special Occasions / Events</div>
+        <div class="chip" onclick="toggleChip(this)">Travel</div>
+        <div class="chip" onclick="toggleChip(this)">Activewear / Athleisure</div>
+        <div class="chip" onclick="toggleChip(this)">Loungewear / Home</div>
+        <div class="chip" onclick="toggleChip(this)">Full wardrobe overhaul</div>
+      </div>
+    </div>
+
+    <div class="conditional" id="workConditional">
+      <label class="q-label">Describe your office dress code</label>
+      <div class="chip-group" data-field="office_dress_code">
+        <div class="chip" onclick="toggleChip(this, true)">Business formal (suits, structured dresses)</div>
+        <div class="chip" onclick="toggleChip(this, true)">Business casual (smart separates, no tie required)</div>
+        <div class="chip" onclick="toggleChip(this, true)">Smart casual (neat but relaxed)</div>
+        <div class="chip" onclick="toggleChip(this, true)">Casual / creative (jeans are fine)</div>
+        <div class="chip" onclick="toggleChip(this, true)">Remote / work from home</div>
+      </div>
+      <div style="margin-top:16px">
+        <label class="q-label">Anything specific about your work environment to keep in mind?</label>
+        <textarea id="work_environment_notes" placeholder="e.g. lots of client meetings, travel, on your feet all day..."></textarea>
+      </div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">How would you describe your current wardrobe?</label>
+      <div class="chip-group" data-field="current_wardrobe">
+        <div class="chip" onclick="toggleChip(this, true)">Starting from scratch</div>
+        <div class="chip" onclick="toggleChip(this, true)">Have basics, want to elevate</div>
+        <div class="chip" onclick="toggleChip(this, true)">Full closet, but nothing works together</div>
+        <div class="chip" onclick="toggleChip(this, true)">Mostly good, just missing key pieces</div>
+        <div class="chip" onclick="toggleChip(this, true)">In transition (new job, lifestyle change, etc.)</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">Are you interested in shoe recommendations?</label>
+      <div class="toggle-group" data-field="shoe_interest">
+        <div class="toggle-option" onclick="toggleOption(this)">Yes — please include</div>
+        <div class="toggle-option" onclick="toggleOption(this)">Only if it completes a look</div>
+        <div class="toggle-option" onclick="toggleOption(this)">No — I handle shoes myself</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">Are you interested in handbag and accessory recommendations?</label>
+      <div class="toggle-group" data-field="accessory_interest">
+        <div class="toggle-option" onclick="toggleOption(this)">Yes — bags & accessories</div>
+        <div class="toggle-option" onclick="toggleOption(this)">Bags only</div>
+        <div class="toggle-option" onclick="toggleOption(this)">Accessories only (jewelry, belts, scarves)</div>
+        <div class="toggle-option" onclick="toggleOption(this)">No — I prefer to handle these</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: Color & Aesthetic -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Color & <span>Aesthetic</span></h2>
+    </div>
+
+    <div class="question">
+      <label class="q-label">How do you feel about color? <span class="required">*</span></label>
+      <div class="chip-group" data-field="color_preference">
+        <div class="chip" onclick="toggleChip(this, true)">Mostly neutrals (black, white, grey, camel, navy)</div>
+        <div class="chip" onclick="toggleChip(this, true)">Neutrals + occasional color pops</div>
+        <div class="chip" onclick="toggleChip(this, true)">I love color — the bolder the better</div>
+        <div class="chip" onclick="toggleChip(this, true)">Earthy / muted tones</div>
+        <div class="chip" onclick="toggleChip(this, true)">Pastels and soft tones</div>
+        <div class="chip" onclick="toggleChip(this, true)">Monochromatic outfits</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">Any colors you love or want to lean into?</label>
+      <input type="text" id="colors_loved" placeholder="e.g. burgundy, olive, cobalt, blush...">
+    </div>
+
+    <div class="question">
+      <label class="q-label">Any colors you avoid or don't wear?</label>
+      <input type="text" id="colors_avoided" placeholder="e.g. orange, yellow, neon...">
+    </div>
+
+    <div class="question">
+      <label class="q-label">How do you feel about patterns?</label>
+      <div class="chip-group" data-field="pattern_preference">
+        <div class="chip" onclick="toggleChip(this)">I prefer solids</div>
+        <div class="chip" onclick="toggleChip(this)">Subtle / tone-on-tone</div>
+        <div class="chip" onclick="toggleChip(this)">Stripes or simple geometric</div>
+        <div class="chip" onclick="toggleChip(this)">Florals</div>
+        <div class="chip" onclick="toggleChip(this)">Animal print</div>
+        <div class="chip" onclick="toggleChip(this)">Bold / abstract prints</div>
+        <div class="chip" onclick="toggleChip(this)">Plaid / check / houndstooth</div>
+        <div class="chip" onclick="toggleChip(this)">Open to anything</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">Which aesthetic words resonate most with how you want to dress?</label>
+      <div class="q-hint">Select up to 4.</div>
+      <div class="chip-group" data-field="aesthetic_words">
+        <div class="chip" onclick="toggleChip(this)">Classic & timeless</div>
+        <div class="chip" onclick="toggleChip(this)">Polished & tailored</div>
+        <div class="chip" onclick="toggleChip(this)">Minimalist</div>
+        <div class="chip" onclick="toggleChip(this)">Effortless & relaxed</div>
+        <div class="chip" onclick="toggleChip(this)">Romantic & feminine</div>
+        <div class="chip" onclick="toggleChip(this)">Edgy & modern</div>
+        <div class="chip" onclick="toggleChip(this)">Bohemian / free-spirited</div>
+        <div class="chip" onclick="toggleChip(this)">Sporty / streetwear</div>
+        <div class="chip" onclick="toggleChip(this)">Elevated basics</div>
+        <div class="chip" onclick="toggleChip(this)">Glamorous / statement</div>
+        <div class="chip" onclick="toggleChip(this)">Preppy</div>
+        <div class="chip" onclick="toggleChip(this)">Eclectic / maximalist</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">Is there a public figure, influencer, or character whose style inspires you?</label>
+      <div class="q-hint">No wrong answers — even a fictional character counts.</div>
+      <input type="text" id="style_inspiration" placeholder="e.g. Zendaya, Kerry Washington, Sofia Richie...">
+    </div>
+  </div>
+
+  <!-- SECTION 5: Body & Fit -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Body & <span>Fit Preferences</span></h2>
+    </div>
+
+    <div class="question">
+      <label class="q-label">How would you describe your body shape? <span class="required">*</span></label>
+      <div class="q-hint">This helps me find cuts that will genuinely work — not just trend-driven fits.</div>
+      <div class="chip-group" data-field="body_shape">
+        <div class="chip" onclick="toggleChip(this, true)">Hourglass (balanced bust & hips, defined waist)</div>
+        <div class="chip" onclick="toggleChip(this, true)">Pear / Triangle (hips wider than shoulders)</div>
+        <div class="chip" onclick="toggleChip(this, true)">Inverted Triangle (shoulders wider than hips)</div>
+        <div class="chip" onclick="toggleChip(this, true)">Rectangle / Athletic (similar bust, waist & hips)</div>
+        <div class="chip" onclick="toggleChip(this, true)">Apple / Round (fuller midsection)</div>
+        <div class="chip" onclick="toggleChip(this, true)">Petite overall</div>
+        <div class="chip" onclick="toggleChip(this, true)">Tall / long torso</div>
+        <div class="chip" onclick="toggleChip(this, true)">Plus size / curvy</div>
+        <div class="chip" onclick="toggleChip(this, true)">I'm not sure — help me figure it out</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="question">
+        <label class="q-label">Clothing size (tops)</label>
+        <input type="text" id="size_tops" placeholder="e.g. S, M, 6, 10...">
+      </div>
+      <div class="question">
+        <label class="q-label">Clothing size (bottoms)</label>
+        <input type="text" id="size_bottoms" placeholder="e.g. 28, 30, 12...">
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="question">
+        <label class="q-label">Shoe size</label>
+        <input type="text" id="shoe_size" placeholder="e.g. 8.5, 9 W...">
+      </div>
+      <div class="question">
+        <label class="q-label">Height</label>
+        <input type="text" id="height" placeholder="e.g. 5'6&quot;">
+      </div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">Areas you love to highlight</label>
+      <div class="chip-group" data-field="areas_highlight">
+        <div class="chip" onclick="toggleChip(this)">Waist / hourglass shape</div>
+        <div class="chip" onclick="toggleChip(this)">Legs</div>
+        <div class="chip" onclick="toggleChip(this)">Décolletage</div>
+        <div class="chip" onclick="toggleChip(this)">Arms / shoulders</div>
+        <div class="chip" onclick="toggleChip(this)">Back</div>
+        <div class="chip" onclick="toggleChip(this)">Curves generally</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">Areas you prefer to minimize or keep covered</label>
+      <div class="chip-group" data-field="areas_minimize">
+        <div class="chip" onclick="toggleChip(this)">Midsection / stomach</div>
+        <div class="chip" onclick="toggleChip(this)">Upper arms</div>
+        <div class="chip" onclick="toggleChip(this)">Hips / thighs</div>
+        <div class="chip" onclick="toggleChip(this)">Bust (prefer more coverage)</div>
+        <div class="chip" onclick="toggleChip(this)">Ankles / legs</div>
+        <div class="chip" onclick="toggleChip(this)">None — I'm comfortable in everything</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">How do you prefer your clothes to fit overall?</label>
+      <div class="chip-group" data-field="fit_preference">
+        <div class="chip" onclick="toggleChip(this, true)">Tailored and close to the body</div>
+        <div class="chip" onclick="toggleChip(this, true)">Relaxed but structured</div>
+        <div class="chip" onclick="toggleChip(this, true)">Loose and oversized</div>
+        <div class="chip" onclick="toggleChip(this, true)">Varies by piece and occasion</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: Lifestyle & Comfort -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2 class="section-title">Lifestyle & <span>Comfort</span></h2>
+    </div>
+
+    <div class="question">
+      <label class="q-label">How active is your daily routine?</label>
+      <div class="q-hint">Helps me balance style with practicality — heels all day vs. walking miles matters.</div>
+      <div class="chip-group" data-field="daily_activity">
+        <div class="chip" onclick="toggleChip(this, true)">Mostly seated / desk-based</div>
+        <div class="chip" onclick="toggleChip(this, true)">On my feet frequently</div>
+        <div class="chip" onclick="toggleChip(this, true)">Commuting and walking a lot</div>
+        <div class="chip" onclick="toggleChip(this, true)">High-energy / physically active</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">How important is comfort in your clothing choices?</label>
+      <div class="scale-group" data-field="comfort_importance">
+        <div class="scale-dot" onclick="selectScale(this)">1</div>
+        <div class="scale-dot" onclick="selectScale(this)">2</div>
+        <div class="scale-dot" onclick="selectScale(this)">3</div>
+        <div class="scale-dot" onclick="selectScale(this)">4</div>
+        <div class="scale-dot" onclick="selectScale(this)">5</div>
+      </div>
+      <div class="scale-labels"><span>Style over comfort</span><span>Comfort above all</span></div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">Any fabrics or materials you love?</label>
+      <div class="chip-group" data-field="fabrics_loved">
+        <div class="chip" onclick="toggleChip(this)">Linen</div>
+        <div class="chip" onclick="toggleChip(this)">Silk / satin</div>
+        <div class="chip" onclick="toggleChip(this)">Cotton</div>
+        <div class="chip" onclick="toggleChip(this)">Cashmere / wool</div>
+        <div class="chip" onclick="toggleChip(this)">Leather / vegan leather</div>
+        <div class="chip" onclick="toggleChip(this)">Denim</div>
+        <div class="chip" onclick="toggleChip(this)">Knits / jersey</div>
+        <div class="chip" onclick="toggleChip(this)">Technical / stretch</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">Any fabrics or materials you want to avoid?</label>
+      <input type="text" id="fabrics_avoided" placeholder="e.g. wool (itchy), polyester, fur...">
+    </div>
+
+    <div class="question">
+      <label class="q-label">Do you have any sustainability preferences?</label>
+      <div class="chip-group" data-field="sustainability">
+        <div class="chip" onclick="toggleChip(this)">Strongly prefer sustainable / ethical brands</div>
+        <div class="chip" onclick="toggleChip(this)">Nice to have when available</div>
+        <div class="chip" onclick="toggleChip(this)">No preference</div>
+        <div class="chip" onclick="toggleChip(this)">Prefer secondhand / resale</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">Do you have any allergies, sensitivities, or fit concerns I should know about?</label>
+      <textarea id="special_considerations" placeholder="e.g. metal allergies, sensory sensitivities, post-surgery considerations..."></textarea>
+    </div>
+  </div>
+
+  <!-- SECTION 7: Service Preferences -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2 class="section-title">How You'd Like to <span>Work Together</span></h2>
+    </div>
+
+    <div class="question">
+      <label class="q-label">How would you like to receive your styling recommendations? <span class="required">*</span></label>
+      <div class="chip-group" data-field="delivery_preference">
+        <div class="chip" onclick="toggleChip(this, true)">Mood boards to browse & shop from, curated store list</div>
+        <div class="chip" onclick="toggleChip(this, true)">Exact pieces found and linked — just tell me what to buy</div>
+        <div class="chip" onclick="toggleChip(this, true)">Full outfits styled and presented (head to toe)</div>
+        <div class="chip" onclick="toggleChip(this, true)">A mix — mood boards first, exact pieces on request</div>
+        <div class="chip" onclick="toggleChip(this, true)">In-person shopping session</div>
+        <div class="chip" onclick="toggleChip(this, true)">Wardrobe edit first, then fill gaps</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">Preferred stores or brands you love</label>
+      <div class="q-hint">I'll prioritize these when sourcing — though I may also introduce you to new favorites.</div>
+      <textarea id="brands_loved" placeholder="e.g. Aritzia, Zara, Toteme, Cos, Net-a-Porter, Nordstrom..."></textarea>
+    </div>
+
+    <div class="question">
+      <label class="q-label">Any stores or brands you'd rather I avoid?</label>
+      <input type="text" id="brands_avoided" placeholder="e.g. fast fashion, certain luxury brands, specific retailers...">
+    </div>
+
+    <div class="question">
+      <label class="q-label">How involved do you want to be in the process?</label>
+      <div class="chip-group" data-field="involvement_level">
+        <div class="chip" onclick="toggleChip(this, true)">Very involved — I want lots of back and forth</div>
+        <div class="chip" onclick="toggleChip(this, true)">Some input, then let you take the lead</div>
+        <div class="chip" onclick="toggleChip(this, true)">Hands-off — surprise me with a full edit</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <label class="q-label">How soon are you looking to shop or need the items?</label>
+      <div class="chip-group" data-field="timeline">
+        <div class="chip" onclick="toggleChip(this, true)">Immediately / this week</div>
+        <div class="chip" onclick="toggleChip(this, true)">Within the next month</div>
+        <div class="chip" onclick="toggleChip(this, true)">Planning ahead — no rush</div>
+        <div class="chip" onclick="toggleChip(this, true)">Ongoing / seasonal refresh</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8: Final Notes -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2 class="section-title">Final <span>Notes</span></h2>
+    </div>
+
+    <div class="question">
+      <label class="q-label">What is your biggest styling frustration or challenge right now?</label>
+      <textarea id="styling_frustration" placeholder="e.g. nothing fits right, I buy things but never wear them, I don't know what 'my style' is..."></textarea>
+    </div>
+
+    <div class="question">
+      <label class="q-label">What would make this a home-run experience for you?</label>
+      <textarea id="success_looks_like" placeholder="Tell me what success looks like — how you want to feel when you get dressed..."></textarea>
+    </div>
+
+    <div class="question">
+      <label class="q-label">Is there anything else you want me to know before we begin?</label>
+      <textarea id="anything_else" placeholder="Open space — no detail too big or small."></textarea>
+    </div>
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="submit-area">
+    <p>Your responses are private and used solely to build your style profile.<br>I'll follow up within 48 hours with next steps.</p>
+    <button class="submit-btn" id="submitBtn" onclick="submitForm()">Submit My Style Profile</button>
+    <div class="error-msg" id="errorMsg"></div>
+    <div class="ornament" style="margin-top:32px">✦ ✦ ✦</div>
+  </div>
+
+</div>
+
+<!-- Success Overlay -->
+<div class="success-overlay" id="successOverlay">
+  <div class="mark">✦</div>
+  <h2>Profile Received</h2>
+  <p>Thank you for taking the time to fill this out. I'll review your responses and be in touch within 48 hours to begin building your style.</p>
+</div>
+
+<script>
+  // ── Chip toggle ──────────────────────────────────────────────
+  function toggleChip(el, single = false) {
+    const group = el.closest('.chip-group');
+    if (single) group.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+    el.classList.toggle('selected');
+    updateProgress();
+  }
+
+  function toggleOption(el) {
+    const group = el.closest('.toggle-group');
+    group.querySelectorAll('.toggle-option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    updateProgress();
+  }
+
+  function selectScale(el) {
+    const group = el.closest('.scale-group');
+    group.querySelectorAll('.scale-dot').forEach(d => d.classList.remove('selected'));
+    el.classList.add('selected');
+    updateProgress();
+  }
+
+  function updateRange(input, displayId) {
+    const val = parseInt(input.value);
+    const suffix = (displayId === 'rangeA' && val >= 1000) || (displayId === 'rangeB' && val >= 5000) ? '+' : '';
+    document.getElementById(displayId).textContent = '$' + val.toLocaleString() + suffix;
+  }
+
+  function checkWork(el) {
+    const cond = document.getElementById('workConditional');
+    cond.classList.toggle('visible', el.classList.contains('selected') && el.dataset.val === 'work');
+  }
+
+  // ── Progress bar ─────────────────────────────────────────────
+  function updateProgress() {
+    const allInputs = document.querySelectorAll('input[type="text"], input[type="email"], textarea');
+    const allChipGroups = document.querySelectorAll('.chip-group');
+    const allToggleGroups = document.querySelectorAll('.toggle-group');
+    const allScales = document.querySelectorAll('.scale-group');
+    let filled = 0, total = 0;
+    allInputs.forEach(i => { total++; if (i.value.trim()) filled++; });
+    allChipGroups.forEach(g => { total++; if (g.querySelector('.chip.selected')) filled++; });
+    allToggleGroups.forEach(g => { total++; if (g.querySelector('.toggle-option.selected')) filled++; });
+    allScales.forEach(g => { total++; if (g.querySelector('.scale-dot.selected')) filled++; });
+    document.getElementById('progressFill').style.width = Math.round((filled / total) * 100) + '%';
+  }
+
+  document.querySelectorAll('input, textarea').forEach(el => el.addEventListener('input', updateProgress));
+
+  // ── Data collection ──────────────────────────────────────────
+  function getChipValues(fieldName) {
+    const group = document.querySelector(`.chip-group[data-field="${fieldName}"]`);
+    if (!group) return null;
+    const selected = [...group.querySelectorAll('.chip.selected')].map(c => c.textContent.trim());
+    return selected.length ? selected.join(', ') : null;
+  }
+
+  function getToggleValue(fieldName) {
+    const group = document.querySelector(`.toggle-group[data-field="${fieldName}"]`);
+    if (!group) return null;
+    const sel = group.querySelector('.toggle-option.selected');
+    return sel ? sel.textContent.trim() : null;
+  }
+
+  function getScaleValue(fieldName) {
+    const group = document.querySelector(`.scale-group[data-field="${fieldName}"]`);
+    if (!group) return null;
+    const sel = group.querySelector('.scale-dot.selected');
+    return sel ? sel.textContent.trim() : null;
+  }
+
+  function getVal(id) {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() || null : null;
+  }
+
+  // ── Validation ───────────────────────────────────────────────
+  function validate() {
+    let valid = true;
+    const errors = [];
+
+    const firstName = getVal('first_name');
+    const email = getVal('email');
+    const location = getVal('location');
+
+    if (!firstName) { errors.push('First name is required.'); document.getElementById('first_name').classList.add('error'); valid = false; }
+    else document.getElementById('first_name').classList.remove('error');
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errors.push('A valid email address is required.');
+      document.getElementById('email').classList.add('error');
+      valid = false;
+    } else document.getElementById('email').classList.remove('error');
+
+    if (!location) { errors.push('Location is required.'); document.getElementById('location').classList.add('error'); valid = false; }
+    else document.getElementById('location').classList.remove('error');
+
+    return { valid, errors };
+  }
+
+  // ── Submit ───────────────────────────────────────────────────
+  async function submitForm() {
+    const { valid, errors } = validate();
+    const errorEl = document.getElementById('errorMsg');
+
+    if (!valid) {
+      errorEl.innerHTML = errors.join('<br>');
+      errorEl.classList.add('visible');
+      errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    errorEl.classList.remove('visible');
+
+    const payload = {
+      // About You
+      first_name:             getVal('first_name'),
+      last_name:              getVal('last_name'),
+      email:                  getVal('email'),
+      age_range:              getChipValues('age_range'),
+      location:               getVal('location'),
+
+      // Budget
+      budget_everyday:        document.getElementById('rangeInputA').value,
+      investment_pieces:      getToggleValue('investment_pieces'),
+      budget_investment:      document.getElementById('rangeInputB').value,
+      shopping_preference:    getChipValues('shopping_preference'),
+
+      // Wardrobe
+      shopping_for:           getChipValues('shopping_for'),
+      office_dress_code:      getChipValues('office_dress_code'),
+      work_environment_notes: getVal('work_environment_notes'),
+      current_wardrobe:       getChipValues('current_wardrobe'),
+      shoe_interest:          getToggleValue('shoe_interest'),
+      accessory_interest:     getToggleValue('accessory_interest'),
+
+      // Aesthetic
+      color_preference:       getChipValues('color_preference'),
+      colors_loved:           getVal('colors_loved'),
+      colors_avoided:         getVal('colors_avoided'),
+      pattern_preference:     getChipValues('pattern_preference'),
+      aesthetic_words:        getChipValues('aesthetic_words'),
+      style_inspiration:      getVal('style_inspiration'),
+
+      // Body & Fit
+      body_shape:             getChipValues('body_shape'),
+      size_tops:              getVal('size_tops'),
+      size_bottoms:           getVal('size_bottoms'),
+      shoe_size:              getVal('shoe_size'),
+      height:                 getVal('height'),
+      areas_highlight:        getChipValues('areas_highlight'),
+      areas_minimize:         getChipValues('areas_minimize'),
+      fit_preference:         getChipValues('fit_preference'),
+
+      // Lifestyle
+      daily_activity:         getChipValues('daily_activity'),
+      comfort_importance:     getScaleValue('comfort_importance'),
+      fabrics_loved:          getChipValues('fabrics_loved'),
+      fabrics_avoided:        getVal('fabrics_avoided'),
+      sustainability:         getChipValues('sustainability'),
+      special_considerations: getVal('special_considerations'),
+
+      // Service
+      delivery_preference:    getChipValues('delivery_preference'),
+      brands_loved:           getVal('brands_loved'),
+      brands_avoided:         getVal('brands_avoided'),
+      involvement_level:      getChipValues('involvement_level'),
+      timeline:               getChipValues('timeline'),
+
+      // Final Notes
+      styling_frustration:    getVal('styling_frustration'),
+      success_looks_like:     getVal('success_looks_like'),
+      anything_else:          getVal('anything_else'),
+    };
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    try {
+      const res = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Something went wrong.');
+      }
+
+      document.getElementById('successOverlay').classList.add('show');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    } catch (err) {
+      errorEl.textContent = err.message || 'Failed to submit. Please try again.';
+      errorEl.classList.add('visible');
+      btn.disabled = false;
+      btn.textContent = 'Submit My Style Profile';
+    }
+  }
+</script>
+
+</body>
+</html>
