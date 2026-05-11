@@ -152,7 +152,7 @@
     document.getElementById('emptyState').style.display = 'none';
     document.getElementById('loadingState').style.display = 'block';
     try {
-      const res = await fetch('/api/responses', { headers: { 'Authorization': `Bearer ${token}` } });
+      const res = await fetch('/api/responses', { headers: { 'Authorization': 'Bearer ' + token } });
       const data = await res.json();
       document.getElementById('loadingState').style.display = 'none';
       if (!res.ok) { errEl.textContent = data.error || 'Failed to load responses.'; errEl.style.display = 'block'; document.getElementById('promptState').style.display = 'block'; return; }
@@ -194,7 +194,6 @@
       const aestheticTag = r.aesthetic_words?.split(',')[0]?.trim();
       const card = document.createElement('div');
       card.className = 'response-card';
-      card.dataset.idx = i;
       card.innerHTML = `
         <div class="card-header" onclick="toggleCard(this)">
           <div class="card-header-left">
@@ -205,8 +204,8 @@
             </div>
           </div>
           <div class="card-tags">
-            ${tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}
-            ${aestheticTag?`<span class="tag gold">${esc(aestheticTag)}</span>`:''}
+            ${tags.map(t=>'<span class="tag">'+esc(t)+'</span>').join('')}
+            ${aestheticTag?'<span class="tag gold">'+esc(aestheticTag)+'</span>':''}
           </div>
           <span class="chevron">▼</span>
         </div>
@@ -277,13 +276,13 @@ Respond ONLY with a JSON object, no preamble, no markdown, no backticks:
 {"stylePersonality":"2-3 sentence narrative","bodyNotes":"2-3 sentences on silhouettes, what to emphasize and minimize","colorStrategy":"1-2 sentences","keyPieces":[{"category":"Tops","name":"piece name","note":"why it works"},{"category":"Bottoms","name":"piece name","note":"why it works"},{"category":"Dresses","name":"piece name","note":"why it works"},{"category":"Outerwear","name":"piece name","note":"why it works"},{"category":"Shoes","name":"piece name","note":"why it works"},{"category":"Bags","name":"piece name","note":"why it works"},{"category":"Accessories","name":"piece name","note":"why it works"},{"category":"Workwear","name":"piece name","note":"why it works"}],"outfitFormulas":[{"name":"Formula name","pieces":"Wide-leg trouser + fitted ribbed tank + block heel mule + structured tote","occasion":"When to wear"},{"name":"Formula name","pieces":"specific pieces","occasion":"When to wear"},{"name":"Formula name","pieces":"specific pieces","occasion":"When to wear"},{"name":"Formula name","pieces":"specific pieces","occasion":"When to wear"},{"name":"Formula name","pieces":"specific pieces","occasion":"When to wear"}],"storesToShop":["store1","store2","store3","store4","store5","store6"],"thingsToAvoid":"2-3 sentences on cuts and styles to avoid and why","stylistNote":"A warm personal 2-sentence note about this client"}`;
 
     try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
+      const res = await fetch('/api/generate-brief', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, messages: [{ role: 'user', content: prompt }] })
+        body: JSON.stringify({ prompt })
       });
       const data = await res.json();
-      const raw = data.content?.find(b => b.type === 'text')?.text || '';
+      const raw = data.text || '';
       const brief = JSON.parse(raw.replace(/```json|```/g,'').trim());
       briefCache[idx] = brief;
       renderBrief(idx, brief, r);
@@ -313,13 +312,13 @@ Respond ONLY with a JSON object, no preamble, no markdown, no backticks:
         <div class="brief-section"><div class="brief-section-title">Color Strategy</div><div class="brief-text">${esc(b.colorStrategy)}</div></div>
         <div class="brief-section">
           <div class="brief-section-title">Key Pieces to Source</div>
-          <div class="piece-grid">${b.keyPieces.map(p=>`<div class="piece-card"><div class="piece-category">${esc(p.category)}</div><div class="piece-name">${esc(p.name)}</div><div class="piece-note">${esc(p.note)}</div></div>`).join('')}</div>
+          <div class="piece-grid">${b.keyPieces.map(p=>'<div class="piece-card"><div class="piece-category">'+esc(p.category)+'</div><div class="piece-name">'+esc(p.name)+'</div><div class="piece-note">'+esc(p.note)+'</div></div>').join('')}</div>
         </div>
         <div class="brief-section">
           <div class="brief-section-title">Outfit Formulas</div>
-          ${b.outfitFormulas.map((f,i)=>`<div class="outfit-formula"><div class="outfit-num">${i+1}</div><div class="outfit-details"><div class="outfit-name">${esc(f.name)}</div><div class="outfit-pieces">${esc(f.pieces)}</div><span class="outfit-occasion">${esc(f.occasion)}</span></div></div>`).join('')}
+          ${b.outfitFormulas.map((f,i)=>'<div class="outfit-formula"><div class="outfit-num">'+(i+1)+'</div><div class="outfit-details"><div class="outfit-name">'+esc(f.name)+'</div><div class="outfit-pieces">'+esc(f.pieces)+'</div><span class="outfit-occasion">'+esc(f.occasion)+'</span></div></div>').join('')}
         </div>
-        <div class="brief-section"><div class="brief-section-title">Stores to Shop</div><div class="store-list">${b.storesToShop.map(s=>`<div class="store-chip">${esc(s)}</div>`).join('')}</div></div>
+        <div class="brief-section"><div class="brief-section-title">Stores to Shop</div><div class="store-list">${b.storesToShop.map(s=>'<div class="store-chip">'+esc(s)+'</div>').join('')}</div></div>
         <div class="brief-section"><div class="brief-section-title">What to Avoid</div><div class="avoid-list">${esc(b.thingsToAvoid)}</div></div>
         <div class="brief-section"><div class="brief-section-title">Stylist Note</div><div class="brief-text" style="font-style:italic;color:var(--taupe);">${esc(b.stylistNote)}</div></div>
       </div>`;
@@ -334,7 +333,6 @@ Respond ONLY with a JSON object, no preamble, no markdown, no backticks:
     const fullName = [r.first_name, r.last_name].filter(Boolean).join(' ');
     const margin = 56, pageW = doc.internal.pageSize.getWidth(), contentW = pageW - margin * 2;
     let y = margin;
-
     function checkPage(needed=40) { if (y+needed > doc.internal.pageSize.getHeight()-margin) { doc.addPage(); y=margin; } }
     function addSectionTitle(title) {
       checkPage(40); doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(184,151,90);
@@ -346,13 +344,11 @@ Respond ONLY with a JSON object, no preamble, no markdown, no backticks:
       const lines = doc.splitTextToSize(text, contentW); checkPage(lines.length*14);
       doc.text(lines, margin, y); y+=lines.length*14+8;
     }
-
     doc.setFillColor(30,28,26); doc.rect(0,0,pageW,80,'F');
     doc.setFont('helvetica','bold'); doc.setFontSize(22); doc.setTextColor(184,151,90); doc.text('STYLE & STILETTO', margin, 38);
     doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.setTextColor(200,190,180); doc.text('Style Brief — '+fullName, margin, 56);
     doc.setFontSize(9); doc.setTextColor(150,140,130); doc.text('Generated '+new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}), margin, 70);
     y = 110;
-
     addSectionTitle('Style Personality'); addBodyText(brief.stylePersonality);
     addSectionTitle('Body & Silhouette Notes'); addBodyText(brief.bodyNotes);
     addSectionTitle('Color Strategy'); addBodyText(brief.colorStrategy);
